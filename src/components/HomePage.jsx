@@ -11,36 +11,20 @@ function HomePage() {
   useEffect(() => {
     const interval = setInterval(() => {
       setDateTime(new Date());
-    }, 60000); // Update every minute
+    }, 60000);
     return () => clearInterval(interval);
   }, []);
-
-  // Format time (without seconds)
-  const formattedTime = dateTime.toLocaleTimeString([], {
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: false, // Use 24-hour format
-  });
-
-  // Format date
-  const formattedDate = dateTime.toLocaleDateString("en-GB", {
-    weekday: "short",
-    day: "2-digit",
-    month: "short",
-  });
-
   const submitHandler = () => {
     navigate(`/room/${input}`);
   };
 
   return (
     <>
-      {/* Animated Navbar */}
       <motion.nav
         className="navbar"
-        initial={{ y: -100, opacity: 0 }} // Start off-screen
-        animate={{ y: 0, opacity: 1 }} // Slide down smoothly
-        transition={{ duration: 0.8, ease: "easeOut" }} // Smooth effect
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
       >
         <motion.div
           className="logo"
@@ -64,15 +48,8 @@ function HomePage() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5, duration: 0.5 }}
           >
-            {formattedTime} • {formattedDate}
-          </motion.span>
-
-          <motion.span
-            className="icons"
-            whileHover={{ scale: 1.1 }}
-            transition={{ duration: 0.2 }}
-          >
-            ❔📄 ⚙️ ⬜
+            {dateTime.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", hour12: false })} •{" "}
+            {dateTime.toLocaleDateString("en-GB", { weekday: "short", day: "2-digit", month: "short" })}
           </motion.span>
 
           <motion.div
@@ -80,43 +57,25 @@ function HomePage() {
             whileHover={{ scale: 1.1, rotate: 10 }}
             transition={{ duration: 0.2 }}
           >
-            S
+            <span>S</span>
           </motion.div>
         </div>
       </motion.nav>
 
-      {/* Main Section */}
       <div className="main">
         <div className="left">
           <h1>Video calls and meetings for everyone</h1>
           <p>Connect, collaborate and celebrate from anywhere with VidoJo Meet</p>
           <div className="buttons">
-            <motion.button
-              className="new-meeting"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-            >
+            <motion.button className="new-meeting" whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
               ➕ New meeting
             </motion.button>
-
-            <input
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              type="text"
-              placeholder="Enter a name or link"
-            />
-
-            <motion.button
-              onClick={submitHandler}
-              className="join"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-            >
+            <input value={input} onChange={(e) => setInput(e.target.value)} type="text" placeholder="Enter a name or link" />
+            <motion.button onClick={submitHandler} className="join" whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
               Join
             </motion.button>
           </div>
         </div>
-
         <div className="right">
           <div className="carousel">
             <img

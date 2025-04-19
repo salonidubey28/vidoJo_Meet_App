@@ -2,7 +2,6 @@ import{createBrowserRouter, RouterProvider} from "react-router-dom"
 import './App.css'
 import HomePage from './components/HomePage'
 import VideoPage from "./components/VideoPage"
-import NotFound from "./components/NotFound"
 
 
 function App() {
@@ -15,10 +14,6 @@ function App() {
       path: "/room/:id",
       element: <VideoPage />
     },
-    {
-      path: "*", // Catch-all route for undefined paths
-      element: <NotFound />,
-    }
   ]
 
   )
